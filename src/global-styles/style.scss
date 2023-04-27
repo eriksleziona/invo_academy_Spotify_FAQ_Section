@@ -1,0 +1,47 @@
+/// Main Styles File
+/// Here we import all the global Styles files we need for our project.
+
+@use "styles/normalize.scss";
+@use "styles/root.scss";
+@use "styles/fonts.scss";
+@use "styles/buttons.scss";
+
+html {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+body {
+  width: 100%;
+  display: table-cell;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--on-background-color);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  &.img--cover {
+    object-fit: cover;
+  }
+}
+
+a {
+  color: var(--on-background-color);
+  transition: .2s;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
