@@ -1,3 +1,163 @@
 .faq-question-partial {
-   
+  --icon-size: 13px;
+  --icon-thickness: 1px;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 24px 32px;
+  background-color: var(--background-color);
+  transition: 0.2s;
+
+  // ensure that every new question
+  // is 8px below the previous one
+  &:not(:first-of-type) {
+    margin-top: 8px;
+  }
+
+  // make our element interactive
+  // and UX friendly
+  &:hover {
+    cursor: pointer;
+    background-color: var(--background-color-primary-hover);
+    border-color: var(--primary-color);
+  }
+  &[data-question-expanded] {
+    // change the element colors
+    // for our xpanded state
+    background-color: var(--background-color-primary-hover);
+    border-color: var(--primary-color);
+
+    .faq-question-partial__icon {
+      &:before {
+        transform: rotate(90deg);
+      }
+
+      &:after {
+        transform: rotate(180deg);
+      }
+    }
+    .faq-question-partial__answer {
+      // set the proper margin top
+      margin-top: 24px;
+
+      // set the max-height to be the answer's height,
+      // which was calculated in the JavaScript
+      max-height: var(--faq-answer-height);
+
+      // show the element with transition
+      overflow: visible;
+      opacity: 1;
+    }
+  }
+
+  & &__first-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & &__title {
+    font-size: 18px;
+    line-height: 1.2em;
+    font-weight: 700;
+  }
+
+  & &__icon {
+    // set the icon to be a child of the question element
+    position: relative;
+
+    // set the distance between the icon and the question text
+    margin-left: 16px;
+
+    // set the size of the icon
+    width: var(--icon-size);
+    height: var(--icon-size);
+
+    // prevent the icon from shrinking when there's not enough space
+    flex-shrink: 0;
+
+    // create two pseudo-elements to make the icon (one vertical and one horizontal line)
+    &:before,
+    &:after {
+      // the content: "" rule is required in order to create an empty pseudo-element
+      // that can be styled and positioned as needed
+      content: "";
+      position: absolute;
+
+      // set the color and transition time of the icon
+      background-color: var(--primary-color);
+      transition: 0.2s;
+    }
+
+    // set the style for the vertical line of the icon
+    &:before {
+      // set the width of the line
+      width: var(--icon-thickness);
+
+      // use calc() to center the line vertically in the icon
+      margin-left: calc(((var(--icon-size) - var(--icon-thickness)) / 2));
+      height: 100%;
+    }
+
+    // set the style for the horizontal line of the icon
+    &:after {
+      // set the height of the line
+      height: var(--icon-thickness);
+
+      // use calc() to center the line horizontally in the icon
+      margin-top: calc(((var(--icon-size) - var(--icon-thickness)) / 2));
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  & &__answer {
+    // margin-top: 24px;
+    // display: none;
+    transition: 0.2s;
+
+    // set the margin-top to 0
+    // because even when the height of the question will be 0
+    // margin-top will still apply making big gap below question title
+    margin-top: 0;
+
+    // set height to 100%, max-height to 0 and overflow: hidden
+    // so our answer will be present but hidden
+    height: 100%;
+    max-height: 0;
+    overflow: hidden;
+
+    // set the opacity to 0 so our answer will smootly show
+    // as the tile is expanding
+    opacity: 0;
+  }
+
+  & &__paragraph {
+    line-height: 1.6em;
+    letter-spacing: -0.01em;
+    font-size: 16px;
+    margin-block: 0;
+
+    // ensure that every new paragraph
+    // is 12px below the previous one
+    &:not(:first-of-type) {
+      margin-top: 12px;
+    }
+  }
+  & &__paragraph--highlight {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 400px) {
+    padding: 24px;
+
+    & &__title {
+      font-size: 16px;
+      line-height: 120%;
+    }
+
+    & &__paragraph {
+      font-size: 14px;
+    }
+  }
 }
